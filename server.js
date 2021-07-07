@@ -4,11 +4,14 @@ const codes = require("./codes.json");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'view')));
 
 const generate = (val) => {
 	const code = v4();
@@ -171,6 +174,13 @@ const save = async () =>
 			
 
 		res.status(200).json(result);
+	});
+
+	app.get('/admin', (req, res) => {
+		res.sendFile(path.join(__dirname, '/view/admin.html'));
+	});
+	app.get('/seller', (req, res) => {
+		res.sendFile(path.join(__dirname, '/view/seller.html'));
 	});
 
 	app.listen(8080, () => {
