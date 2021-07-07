@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Seller | E-STARTED CARNIVAL</title>
+
+		<link rel="stylesheet" href="./styles/global.css" />
+		<link rel="stylesheet" href="./styles/seller.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="form">
+				<div class="title">Paste code here</div>
+				<input
+					id="code"
+					type="text"
+					placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+				/>
+				<button onclick="submit()">Check</button>
+			</div>
+		</div>
+		<div class="footer">
+			<img class="ump-logo" src="./images/ump-logo.png" />
+			<div class="labels">
+				<div class="item">E-Started Carnival</div>
+				<div class="dot"></div>
+				<div class="item">JHEPA</div>
+				<div class="dot"></div>
+				<div class="item">FKOM</div>
+			</div>
+			<div></div>
+		</div>
+
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script>
+			const input = document.querySelector("#code");
+
+			const submit = async () => {
+				try {
+                    const code = input.value;
+					const { used, value } = await validate(code);
+
+                    let apply;
+					if (!used) {
+						apply = await swal({
+							title: "Valid!",
+							text: `Value: RM${value}.00`,
+							icon: "success",
+							buttons: ["Cancel", "Apply code"],
+						});
+					} else {
+                        swal({
+                            title: 'Used!',
+                            text: 'Given code is already been used',
+                            icon: 'error'
+                        });
+                    }
+
+                    if (apply) {
+                        const ref = await swal({
+                            text: 'Enter reference (Phone number/email)',
+                            content: 'input'
+                        });
+
+                        if (ref === '') {
+                            throw new Error('Reference is left blank');
+                        }
+
+                        await applyCode(code, ref);
+
+                        swal({
+                            title: 'Applied!',
+                            text: `The code RM${value} is applied successfully`,
+                            icon: 'success'
+                        });
+                    }
+				} catch (e) {
+                    console.error(e);
+					swal({
+						title: "Invalid!",
+						icon: "error",
+					});
+				}
+
+                input.value = "";
+			};
+
+            const applyCode = async (code, ref) => 
+                new Promise(async (resolve, reject) => {
+                    if (code === "") {
+						return reject('no code given');
+					}
+
+                    try {
+						await $.get(
+							`http://localhost:8080/setused?id=${code}&ref=${ref}`
+						);
+
+						resolve({code, ref});
+					} catch (e) {
+                        reject(e);
+                    }
+                });
+
+			const validate = async (code) =>
+				new Promise(async (resolve, reject) => {
+					if (code === "") {
+						return reject(0);
+					}
+
+					try {
+						const { valid, used, value } = await $.get(
+							`http://localhost:8080/isvalid?id=${code}`
+						);
+
+						if (valid) return resolve({ valid, used, value });
+						reject(0);
+					} catch (e) {
+                        reject(0);
+                    }
+				});
+		</script>
+	</body>
+</html>

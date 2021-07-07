@@ -1,0 +1,128 @@
+.container {
+    width: 100%;
+    height: calc(100vh - 80px);
+
+    background: #2E1E5A;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+}
+
+.table {
+    width: 80%;
+
+    display: flex;
+    
+    flex-direction: column;
+
+    background: #997FE3;
+
+    overflow-y: auto;
+    max-height: 500px;
+
+    border-radius: 8px;
+
+    padding: 5px 10px;
+
+    & > .row {
+        position: relative;
+
+        width: 100%;
+
+        display: flex;
+
+        &.header {
+
+            background: #997FE3;
+
+            & > .col {
+                padding: 10px;
+
+                color: white;
+                font-weight: bold;
+            }
+        }
+
+        & > .col {
+            text-align: center;
+
+            padding: 5px 10px;
+
+            &:nth-child(1) {
+                flex: 0 0 5%;
+            }
+            &:nth-child(2) {
+                flex: 0 0 40%;
+            }
+            &:nth-child(3) {
+                flex: 0 0 20%;
+            }
+            &:nth-child(4) {
+                flex: 0 0 15%;
+            }
+            &:nth-child(5) {
+                flex: 0 0 10%;
+            }
+        }
+    }
+}
+
+.actions {
+    & > button {
+        background: #997FE3;
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    height: 80px;
+    width: 100%;
+
+    background: #997FE3;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    & > .ump-logo {
+        height: 60px;
+    }
+
+    & > .labels {
+        display: flex;
+        align-items: center;
+
+        gap: 20px;
+
+        margin-right: 100px;
+        & > div {
+            &.item {
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+            &.dot {
+                height: 5px;
+                width: 5px;
+
+                border-radius: 50%;
+                background: #2E1E5A;
+            }
+        }
+    }
+}

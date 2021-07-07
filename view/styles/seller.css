@@ -1,0 +1,106 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  background: #2E1E5A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.form > .title {
+  color: white;
+  font-size: 3.5rem;
+}
+.form > input {
+  outline: none;
+  padding: 10px 15px;
+  width: 500px;
+  color: #a0a0a0;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 25px;
+  border: none;
+}
+.form > button {
+  background: #997FE3;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.result {
+  width: 300px;
+  padding: 15px 20px;
+  border: 1px solid #997FE3;
+}
+.result > .validate-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.result > .validate-items > .item {
+  display: flex;
+  justify-content: space-between;
+  color: #997FE3;
+}
+.result > .validate-items > .item > .val {
+  color: gray;
+  font-size: 0.8rem;
+}
+.result > .validate-items > .item > .val.yes {
+  color: greenyellow;
+}
+.result > .validate-items > .item > .val.no {
+  color: red;
+}
+.result > .code-value {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 80px;
+  width: 100%;
+  background: #997FE3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+.footer > .ump-logo {
+  height: 60px;
+}
+.footer > .labels {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 100px;
+}
+.footer > .labels > div.item {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.footer > .labels > div.dot {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background: #2E1E5A;
+}
+
+/*# sourceMappingURL=seller.css.map */
