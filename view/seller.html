@@ -40,10 +40,17 @@
 		></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script>
+			let url;
+			$.getJSON('./config.json').then(d => {
+				url = d.url;
+			});
+
 			const input = document.querySelector("#code");
 
 			const submit = async () => {
 				try {
+					
+
                     const code = input.value;
 					const { used, value } = await validate(code);
 
@@ -100,7 +107,7 @@
 
                     try {
 						await $.get(
-							`http://localhost:8080/setused?id=${code}&ref=${ref}`
+							`${url}/setused?id=${code}&ref=${ref}`
 						);
 
 						resolve({code, ref});
@@ -117,7 +124,7 @@
 
 					try {
 						const { valid, used, value } = await $.get(
-							`http://localhost:8080/isvalid?id=${code}`
+							`${url}/isvalid?id=${code}`
 						);
 
 						if (valid) return resolve({ valid, used, value });
